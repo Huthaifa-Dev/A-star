@@ -132,6 +132,10 @@ const printPath = async solution => {
 
 const Generate = () => {
     // console.log(tempGame);
+        finishElement=null
+    startElement=null
+    start=0;
+    finish=0;
     car.classList.add('hidden');
 
 
