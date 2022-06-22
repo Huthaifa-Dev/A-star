@@ -80,15 +80,30 @@ const solve = () => {
 
 const timer = ms => new Promise(res => setTimeout(res, ms))
 const printPath = async solution => {
-    console.log(solution);
+    // console.log(solution);
     car.classList.remove('hidden');
+    const paths = document.querySelectorAll('.path');
+    // console.log(paths)
+    if(paths.length > 0) {
+        for(let path = 0; path < paths.length; path++) {
+            // console.log(path);
+            paths[path].classList.remove('path');
+            paths[path].classList.add('available');
+        }
+    }
     for (index in solution) {
+        let cell = table.children[solution[index][0]].children[solution[index][1]];
+        // console.log(cell);
+        if(!cell.classList.contains('start')&&!cell.classList.contains('finish')) {
+            cell.classList.remove('available');
+            cell.classList.add('path');
+        }
         const xPos = parseInt(car.style.left.replace('px', ''));
         const yPos = parseInt(car.style.top.replace('px', ''));
-        console.log(xPos, yPos);
+        // console.log(xPos, yPos);
         const yIndex = solution[index][0] * 32;
         const xIndex = solution[index][1] * 32;
-        console.log(xIndex, yIndex);
+        // console.log(xIndex, yIndex);
         const diffY = -(yPos - yIndex) / 32;
         const diffX = -(xPos - xIndex) / 32;
         switch (diffY) {
@@ -114,7 +129,7 @@ const printPath = async solution => {
         car.style.left = xIndex + 'px';
         car.style.top = yIndex + 'px';
 
-        await timer(500);
+        await timer(300);
     }
     start = finish;
     startElement.classList.remove("start");

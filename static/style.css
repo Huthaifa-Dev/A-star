@@ -92,6 +92,9 @@ td.available {
     position: relative;
 
 }
+.path{
+    background-color: aquamarine !important;
+}
 
 td.available.start::before{
     position: absolute;
